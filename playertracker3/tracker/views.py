@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse
+from django.http import Http404
 from .models import Player
 
 # Create your views here.
@@ -12,6 +13,6 @@ def index(request):
 	return render(request, 'tracker/index.html', context)
 	
 def player(request, player_id):
-	response = "Player: %s"
-	return HttpResponse(response % player_id)
+	player = get_object_or_404(Player, pk=player_id)
+	return render(request, 'tracker/player.html', {'player': player})
 
