@@ -1,2 +1,9 @@
 <h1>{{ player.player_name }}</h1>
 <h2>{{ player.touchdowns }} </h2>
+
+{% if error_message %} <p><strong>{{ error_message </strong></p>{% endif %}
+
+<form action = "{% url 'tracker:player' player.id %}" method="post">
+   {% csrf_token %}
+    {% for choice in player.player_name.all %}
+        <input type = "text" name="select_player" id="select_player"{{ forloop.counter }}" value="{{ choice.id }}" />
